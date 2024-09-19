@@ -27,9 +27,20 @@
       <form id="reserve-form-{{ court.id }}" action="{% url 'reserve' court.id %}" method="post" style="display:none;">
         {% csrf_token %}
         <label for="member1">Member 1:</label>
-        <input type="text" id="member1" name="member1" required><br>
+        <select id="member1" name="member1" required>
+          <option value="" disabled selected>Select member 1</option>
+          {% for member in all_members %}
+          <option value="{{ member.id }}">{{ member.firstname }} {{ member.lastname }}</option>
+          {% endfor %}
+        </select><br>
+
         <label for="member2">Member 2:</label>
-        <input type="text" id="member2" name="member2" required><br>
+        <select id="member2" name="member2" required>
+          <option value="" disabled selected>Select member 2</option>
+          {% for member in all_members %}
+          <option value="{{ member.id }}">{{ member.firstname }} {{ member.lastname }}</option>
+          {% endfor %}
+        </select><br>
         <input type="submit" value="Submit">
       </form>
       {% endif %}
